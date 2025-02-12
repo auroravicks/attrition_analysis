@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        #results {
+            background-color: #e7e7e7;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: left;
+            display: none;
+        }
+
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007BFF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            padding: 10px;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .toast.show {
+            visibility: visible;
+            animation: fadeInOut 3s;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+
+        .result-section {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .result-section strong {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .result-section p {
+            background-color: #f1f1f1;
+            padding: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Employee Sentiment Analysis</h2>
+
+    <button onclick="useSampleData()">Try with Sample Data</button>
+
+    <form id="feedback-form">
+        <textarea id="feedback" rows="6" cols="50" placeholder="Enter feedback..."></textarea><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    <div class="loader" id="loader"></div>
+
+    <h3>Analysis Result:</h3>
+    <div id="results"></div>
+
+    <div class="toast" id="toast">Sample Data Selected</div>
+
+    <script>
+        let sampleData = [];
+
+        async function loadSampleData() {
+            try {
+                const response = await fetch("data.json");
+                sampleData = await response.json();
+            } catch (error) {
+                console.error("Error loading sample data:", error);
+            }
+        }
+
+        async function analyzeFeedback(feedback) {
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("results").style.display = "none";
+
+            try {
+                const response = await fetch('http://localhost:8000/analyze_feedback/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ feedback })
+                });
+
+                const result = await response.json();
+                document.getElementById("loader").style.display = "none";
+                formatResults(result);
+            } catch (error) {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("results").innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+                document.getElementById("results").style.display = "block";
+            }
+        }
+
+        function formatResults(result) {
+            const resultsContainer = document.getElementById("results");
+
+            if (result.error) {
+                resultsContainer.innerHTML = `<div class="error">❌ Error: ${result.error}</div>`;
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="result-section"><strong>Attrition Probability:</strong> <p>${result.analysis.attrition_probability}</p></div>
+                    <div class="result-section"><strong>Sentiment:</strong> <p>${result.analysis.sentiment}</p></div>
+                    <div class="result-section"><strong>Key Issues:</strong> <p>${result.analysis.key_issues.join(", ")}</p></div>
+                    <div class="result-section"><strong>Recommendations:</strong> <p>${result.analysis.recommendations.join(", ")}</p></div>
+                `;
+            }
+
+            resultsContainer.style.display = "block";
+        }
+
+        document.getElementById('feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const feedback = document.getElementById('feedback').value;
+            analyzeFeedback(feedback);
+        });
+
+        function useSampleData() {
+            if (sampleData.length === 0) {
+                alert("Sample data not loaded yet. Please try again in a few seconds.");
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * sampleData.length);
+            const selectedSample = sampleData[randomIndex];
+
+            document.getElementById('feedback').value = JSON.stringify(selectedSample, null, 2);
+            showToast(`Sample Selected: ${selectedSample.name}`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        loadSampleData();
+    </script>
+</body>
+
+</html>

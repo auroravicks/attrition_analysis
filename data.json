@@ -1,0 +1,117 @@
+[
+    {
+      "employee_id": "E101",
+      "name": "Amit Sharma",
+      "department": "Engineering",
+      "feedback": "I've been consistently working overtime without any extra compensation. Deadlines keep changing, unrealistic, and no recognition. Career growth? Not happening.",
+      "tenure": 4.5,
+      "ratings": {"job_satisfaction": 2, "work_life_balance": 1, "manager_support": 1}
+    },
+    {
+      "employee_id": "E102",
+      "name": "Neha Iyer",
+      "department": "Marketing",
+      "feedback": {
+        "summary": "Work is engaging, but internal politics make things difficult.",
+        "detailed": "I like the projects, but some folks get special treatment. I put in work, numbers look great, but promotions are slow. Doesn't feel fair."
+      },
+      "tenure": 3.0,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 3, "manager_support": 2}
+    },
+    {
+      "employee_id": "E103",
+      "name": "Rajesh Verma",
+      "department": "Customer Support",
+      "feedback": [
+        "I like my team.",
+        "But customers can be too much sometimes.",
+        "Policies change all the time. Hard to keep up.",
+        "Salary not increasing. Don't know if I wanna stay long."
+      ],
+      "tenure": 2.8,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 2, "manager_support": 3}
+    },
+    {
+      "employee_id": "E104",
+      "name": "Divya Nair",
+      "department": "HR",
+      "feedback": {
+        "meeting_topic": "Exit Interview",
+        "transcript": [
+          {"speaker": "HR", "text": "Why are you leaving?"},
+          {"speaker": "Employee", "text": "No recognition. No flexibility. Better offer elsewhere."},
+          {"speaker": "HR", "text": "Did you discuss this with your manager?"},
+          {"speaker": "Employee", "text": "Tried. Nothing changed."}
+        ]
+      },
+      "tenure": 5.2,
+      "ratings": {"job_satisfaction": 2, "work_life_balance": 3, "manager_support": 1}
+    },
+    {
+      "employee_id": "E105",
+      "name": "Vikram Choudhary",
+      "department": "Finance",
+      "feedback": "Yeah, job is fine. Not much to say. Some days better than others. Remote work would be nice.",
+      "tenure": 6.0,
+      "ratings": {"job_satisfaction": 4, "work_life_balance": 4, "manager_support": 4}
+    },
+    {
+      "employee_id": "E106",
+      "name": "Sneha Rao",
+      "department": "Operations",
+      "feedback": {
+        "survey_responses": {
+          "general": "Could be better.",
+          "specific": [
+            "Workload has increased but team size remains same.",
+            "Management doesn't communicate changes clearly.",
+            "Feel undervalued."
+          ]
+        }
+      },
+      "tenure": 2.0,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 2, "manager_support": 3}
+    },
+    {
+      "employee_id": "E107",
+      "name": "Anil Gupta",
+      "department": "Legal",
+      "feedback": [
+        "Company town hall was just management talking. No real changes.",
+        "Lack of transparency in promotions.",
+        "Policies? Always unclear."
+      ],
+      "tenure": 4.8,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 3, "manager_support": 2}
+    },
+    {
+      "employee_id": "E108",
+      "name": "Priya Menon",
+      "department": "Sales",
+      "feedback": {
+        "email_complaint": "Sent an email to HR last month about unfair commissions. No response yet. Not the first time.",
+        "verbal": "Told my manager. He just shrugged."
+      },
+      "tenure": 3.4,
+      "ratings": {"job_satisfaction": 2, "work_life_balance": 3, "manager_support": 1}
+    },
+    {
+      "employee_id": "E109",
+      "name": "Arun Das",
+      "department": "IT",
+      "feedback": {
+        "meeting_summary": "Discussed workload concerns. Manager acknowledged but no action taken. Frustration growing."
+      },
+      "tenure": 5.5,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 2, "manager_support": 2}
+    },
+    {
+      "employee_id": "E110",
+      "name": "Ritika Sen",
+      "department": "Admin",
+      "feedback": "Been here a long time. Culture has changed. Feels less employee-friendly. Might start looking elsewhere.",
+      "tenure": 7.0,
+      "ratings": {"job_satisfaction": 3, "work_life_balance": 3, "manager_support": 2}
+    }
+  ]
+  
