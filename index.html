@@ -205,7 +205,7 @@
             const selectedSample = sampleData[randomIndex];
 
             document.getElementById('feedback').value = JSON.stringify(selectedSample, null, 2);
-            showToast(`Sample Selected: ${selectedSample.name}`);
+            showToast(`Random sample selected and populated. It is editable`);
         }
 
         function showToast(message) {
