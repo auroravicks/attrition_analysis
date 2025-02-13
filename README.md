@@ -20,7 +20,7 @@ This project analyzes employee feedback using AI to determine sentiment and asse
 ### 1️⃣ Clone the Repository  
 **Run in terminal**
 git clone https://github.com/yourusername/employee-sentiment-analysis.git
-cd employee-sentiment-analysis
+cd attrition-analysis
 
 python -m venv venv
 source venv/bin/activate   # macOS/Linux
@@ -43,5 +43,6 @@ Open index.html in the browser to startup the frontend
 The app is now ready to experiment and test.
 Could not deploy it because backend hosting needed more time to setup.
  
-## !! Please note:
-## Gemini sometimes returns outputs without json, which are not accessible to the frontend. Just resubmit
+!! Please note:
+Gemini sometimes returns outputs without json, which are not accessible to the frontend. Just resubmit the resume, the next response will likely be properly serializable
+Potential fix: set temperature=0 in Gemini Params, did not get time to experiment and confirm.
